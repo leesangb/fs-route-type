@@ -1,21 +1,20 @@
+import path from 'path';
 import { DefaultRouting } from './defaultRouting';
 
 export class NextPages extends DefaultRouting {
     protected override getKeyValue(filename: string): { key: string, value: string } {
-        const { key, value } = super.getKeyValue(filename);
-        const keyWithoutPages = key.replace(/^\/pages/, '');
+        const segments = filename.split(path.sep);
+        const file = segments.pop()!;
+        const staticSegments = segments.filter(s => s !== 'pages' && !this.isDynamicSegment(s));
+        const dynamicSegments = segments.filter(s => this.isDynamicSegment(s));
 
-        if (!value.startsWith('index.')) {
-            const [filename] = value.split('.');
-            return {
-                key: `${keyWithoutPages}/${filename}`,
-                value,
-            };
+        if (!file.startsWith('index.') && !this.isDynamicSegment(file)) {
+            staticSegments.push(file.replace(/\.[^/.]+$/, ''));
         }
-
+        const key = ['', ...staticSegments].join('/') || '/';
         return {
-            key: keyWithoutPages || '/',
-            value,
+            key,
+            value: [...dynamicSegments, file].join('/'),
         };
     }
 }
