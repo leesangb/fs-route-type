@@ -41,14 +41,14 @@ export const ConfigSchema = z.object({
              * only for object mode
              * case style of output object keys
              * @example
-             * camelCase: 'testRoute'
-             * pascalCase: 'TestRoute'
-             * snakeCase: 'test_route'
-             * kebabCase: 'test-route'
-             * screamCase: 'TEST_ROUTE'
-             * @default camelCase
+             * camel: 'testRoute'
+             * pascal: 'TestRoute'
+             * snake: 'test_route'
+             * kebab || param: 'test-route'
+             * screaming_snake || constant: 'TEST_ROUTE'
+             * @default constant
              */
-            case: z.enum(['camel', 'pascal', 'snake', 'param', 'constant']).optional().default('constant'),
+            case: z.enum(['camel', 'pascal', 'snake', 'kebab', 'param', 'constant', 'screaming_snake']).optional().default('constant'),
             /**
              * object key for root path
              */
