@@ -10,7 +10,7 @@ export const objectTemplate = (config: ObjectTemplateConfig, paths: string[]) =>
 `;
 };
 
-const changeCase = (path: string, caseStyle: ObjectTemplateConfig['case']) => {
+const changeCase = (path: string, caseStyle: ObjectTemplateConfig['case']): string => {
     const segments = path.split('/');
     segments.shift();
     switch (caseStyle) {
@@ -20,8 +20,10 @@ const changeCase = (path: string, caseStyle: ObjectTemplateConfig['case']) => {
         return segments.map((segment) => pascalCase(segment)).join('_');
     case 'snake':
         return segments.map((segment) => snakeCase(segment)).join('_');
+    case 'kebab':
     case 'param':
         return segments.map((segment) => paramCase(segment)).join('_');
+    case 'screaming_snake':
     case 'constant':
         return segments.map((segment) => constantCase(segment)).join('_');
     }
