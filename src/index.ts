@@ -1,4 +1,5 @@
 import { getConfig } from '@/config';
+import { writeFile } from '@/utils/file';
 import chokidar from 'chokidar';
 import { Command } from 'commander';
 import fs from 'fs';
@@ -17,10 +18,10 @@ type WatchOptions = {
 
 program
     .command('watch')
-    .option('-c, --config <path>', 'config file path')
+    .option('-c, --config <path>', 'config file path (js or json)')
     .description('watch files')
-    .action((options: WatchOptions) => {
-        const config = getConfig(options.config);
+    .action(async (options: WatchOptions) => {
+        const config = await getConfig(options.config);
 
         const watcher = chokidar.watch([...config.files], {
             ignored: /node_modules/,
@@ -31,11 +32,7 @@ program
 
         const write = debounce(() => {
             console.log('write', routing.routes);
-            const dir = config.output.path.split('/').slice(0, -1).join('/');
-            if (!fs.existsSync(dir)) {
-                fs.mkdirSync(dir, { recursive: true });
-            }
-            fs.writeFileSync(config.output.path, getTemplate(config.output, routing.routes));
+            void writeFile(config.output.path, getTemplate(config.output, routing.routes));
         }, 100);
 
         watcher.on('add', (path) => {
