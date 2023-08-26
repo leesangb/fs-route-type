@@ -15,7 +15,7 @@ function createKey(config: ObjectTemplateConfig, path:string, groupName?: string
 }
 
 function createObject(config: ObjectTemplateConfig, paths: string[], groupName?: string) {
-    return `export const ${changeCase(`/${groupName}`, 'pascal')}${config.name} = {
+    return `export const ${changeCase(`/${groupName ?? ''}`, 'pascal')}${config.name} = {
     ${paths.map(path => `${createKey(config, path, groupName)}: '${path}'`).join(',\n    ')},
 } as const;`;
 }
