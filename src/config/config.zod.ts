@@ -25,6 +25,7 @@ export const ConfigSchema = z.object({
          * Name of output type or object
          */
         name: z.string().default('Route'),
+        split: z.boolean().optional().default(false),
     }).and(z.discriminatedUnion('mode', [
         z.object({
             /**
