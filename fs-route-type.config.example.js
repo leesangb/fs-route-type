@@ -8,8 +8,9 @@ module.exports = {
         './app/**/(page|route).(tsx|ts|js|jsx)'
     ],
     output: {
-        mode: 'type',
+        mode: 'object',
         path: './out/types/routes.ts',
-        name: 'Route'
+        name: 'Route',
+        split: false,
     }
 };
