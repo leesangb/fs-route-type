@@ -1,4 +1,4 @@
-import { expect, describe, it, test } from 'vitest';
+import { expect, describe, it, test } from 'bun:test';
 import { NextPages } from './nextPages';
 
 describe('when adding 3 files with same route', () => {
@@ -16,9 +16,9 @@ describe('when adding 3 files with same route', () => {
         });
 
         expect(nextPages.routes).toHaveLength(1);
-        expect(nextPages.routes).toEqual(expect.arrayContaining([
+        expect(nextPages.routes).toEqual([
             '/page',
-        ]));
+        ]);
     });
 
     describe('then removing 1 file', () => {
@@ -31,9 +31,9 @@ describe('when adding 3 files with same route', () => {
             nextPages.removeFile(sameRouteFiles[0]);
 
             expect(nextPages.routes).toHaveLength(1);
-            expect(nextPages.routes).toEqual(expect.arrayContaining([
+            expect(nextPages.routes).toEqual([
                 '/page',
-            ]));
+            ]);
         });
     });
 
@@ -68,11 +68,11 @@ describe('when adding multiple files with 3 different routes', () => {
         });
 
         expect(nextPages.routes).toHaveLength(3);
-        expect(nextPages.routes).toEqual(expect.arrayContaining([
+        expect(nextPages.routes).toEqual([
             '/page',
             '/test/page',
             '/',
-        ]));
+        ]);
     });
 
     describe('then removing 1 file', () => {
@@ -85,10 +85,10 @@ describe('when adding multiple files with 3 different routes', () => {
             nextPages.removeFile(differentRouteFiles[0]);
 
             expect(nextPages.routes).toHaveLength(2);
-            expect(nextPages.routes).toEqual(expect.arrayContaining([
+            expect(nextPages.routes).toEqual([
                 '/test/page',
                 '/',
-            ]));
+            ]);
         });
     });
 });
@@ -125,8 +125,8 @@ describe('when adding dynamic route', () => {
         nextPages.addFile(filename);
 
         expect(nextPages.routes).toHaveLength(1);
-        expect(nextPages.routes).toEqual(expect.arrayContaining([
+        expect(nextPages.routes).toEqual([
             expected,
-        ]));
+        ]);
     });
 });

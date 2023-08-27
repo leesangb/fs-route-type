@@ -4,30 +4,26 @@
   "version": "0.0.1",
   "description": "filesystem-based routes type generator",
   "main": "dist/index.js",
-  "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
   "bin": {
-    "fs-route-type": "./dist/index.js"
+    "fs-route-type": "dist/index.js"
   },
   "scripts": {
     "build": "tsup src/index.ts --format cjs,esm --dts",
     "lint": "eslint src --ext .ts",
-    "dev": "nodemon",
-    "test": "vitest",
-    "test:watch": "vitest watch"
+    "dev": "bun run --watch ./src/index.ts watch -c fs-route-type.config.example.js",
+    "test": "bun test",
+    "test:watch": "bun test --watch"
   },
   "devDependencies": {
     "@types/node": "^20.5.1",
     "@typescript-eslint/eslint-plugin": "^6.4.0",
     "@typescript-eslint/parser": "^6.4.0",
+    "bun-types": "^0.8.1",
     "eslint": "^8.47.0",
-    "nodemon": "^3.0.1",
     "prettier": "^3.0.2",
-    "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.2.0",
     "tsup": "^7.2.0",
-    "typescript": "^5.1.6",
-    "vitest": "^0.34.2"
+    "typescript": "^5.1.6"
   },
   "dependencies": {
     "change-case": "^4.1.2",

@@ -1,4 +1,4 @@
-import { expect, describe, it, test } from 'vitest';
+import { expect, describe, it, test } from 'bun:test';
 import { NextApp } from './nextApp';
 
 describe('when adding 3 files with same route', () => {
@@ -16,9 +16,9 @@ describe('when adding 3 files with same route', () => {
         });
 
         expect(nextApp.routes).toHaveLength(1);
-        expect(nextApp.routes).toEqual(expect.arrayContaining([
+        expect(nextApp.routes).toEqual([
             '/',
-        ]));
+        ]);
     });
 
     describe('then removing 1 file', () => {
@@ -31,9 +31,9 @@ describe('when adding 3 files with same route', () => {
             nextApp.removeFile(sameRouteFiles[0]);
 
             expect(nextApp.routes).toHaveLength(1);
-            expect(nextApp.routes).toEqual(expect.arrayContaining([
+            expect(nextApp.routes).toEqual([
                 '/',
-            ]));
+            ]);
         });
     });
 
@@ -68,11 +68,11 @@ describe('when adding 3 files with 3 different routes', () => {
         });
 
         expect(nextApp.routes).toHaveLength(3);
-        expect(nextApp.routes).toEqual(expect.arrayContaining([
+        expect(nextApp.routes).toEqual([
             '/',
-            '/app',
             '/test',
-        ]));
+            '/app',
+        ]);
     });
 
     describe('then removing 1 file', () => {
@@ -85,10 +85,10 @@ describe('when adding 3 files with 3 different routes', () => {
             nextApp.removeFile(differentRouteFiles[0]);
 
             expect(nextApp.routes).toHaveLength(2);
-            expect(nextApp.routes).toEqual(expect.arrayContaining([
-                '/app',
+            expect(nextApp.routes).toEqual([
                 '/test',
-            ]));
+                '/app',
+            ]);
         });
     });
 });
@@ -117,8 +117,8 @@ describe('when adding dynamic route', () => {
         nextApp.addFile(filename);
 
         expect(nextApp.routes).toHaveLength(1);
-        expect(nextApp.routes).toEqual(expect.arrayContaining([
+        expect(nextApp.routes).toEqual([
             expected,
-        ]));
+        ]);
     });
 });

@@ -1,6 +1,0 @@
-{
-  "watch": ["src", "fs-route-type.config.example.js"],
-  "ext": "ts,json",
-  "ignore": ["src/**/*.test.ts"],
-  "exec": "ts-node ./src/index.ts watch -c fs-route-type.config.example.js"
-}
