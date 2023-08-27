@@ -1,8 +1,9 @@
+#!/usr/bin/env node
+
 import { getConfig } from '@/config';
 import { writeFile } from '@/utils/file';
 import chokidar from 'chokidar';
 import { Command } from 'commander';
-import fs from 'fs';
 import { getRouting } from '@/routing';
 import { getTemplate } from '@/templates';
 import { debounce } from '@/utils/debounce';
